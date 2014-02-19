@@ -1,47 +1,24 @@
-function mod11(strIdTag) {
-    var objTag = document.getElementById(strIdTag);
-    var rut = "";
-    if(objTag.length){
-        rut = objTag.value; 
+function cl_rut(strRut) {
+    console.log(strRut);
+    if(strRut.indexOf('-') < 0) return false;
+    var intMultiple = 3;
+    var intTotalSum = 0;
+    var intMaxLength = strRut.length;
+    if(intMaxLength < 10) strRut = "0" * (10 - intMaxLength) + strRut;
+    for (var numero in strRut) {
+        if (numero == '-') break;
+        intTotalSum += intMultiple * numero;
+        intMultiple--;
+        if (intMultiple == 1) intMultiple = 7;
     }
-    var numero;
-    var multiplo = 3;
-    var sumaTotal = 0;
-    var modulo;
-    var dv;
-    var cadenaCompleta;
-    if (rut != "" && rut != "--") {
-        if (rut.length != 9 && rut.length != 10 && rut.length != 0) {
-            evento.preventDefault();
-            alert("Has Ingresado un RUT inválido\nPor favor Verifique lo ingresado");
-            return 0;
-        } else {
-            if (rut.length == 9) {
-                rut = "0" + rut;
-            }
-            for (actual = 0; actual < (rut.length - 2); actual++) {
-                numero = rut[actual];
-                sumaTotal += multiplo * numero;
-                multiplo--;
-                if (multiplo == 1) {
-                    multiplo = 7;
-                }
-            }
-            modulo = sumaTotal % 11;
-            dv = 11 - modulo;
-            if ((dv == 10) && (rut[rut.length - 1] != 'k' && rut[rut.length - 1] != 'K')) {
-                evento.preventDefault();
-                alert("Has Ingresado un RUT inválido\nPor favor Verifique lo ingresado");
-                return 0;
-            } else if ((dv != 10) && (dv != rut[rut.length - 1])) {
-                evento.preventDefault();
-                alert("Has Ingresado un RUT inválido\nPor favor Verifique lo ingresado");
-                return 0;
-            }
-        }
+    modulo = intTotalSum % 11;
+    dv = 11 - modulo;
+    dvrut = strRut[intMaxLength - 1];
+    if ((dv == 10) && (dvrut.toUpperCase() != 'K')) {
+        return false;
+    } else if ((dv != 10) && !(dv == dvrut)) {
+        return false;
     } else {
-        evento.preventDefault();
-        alert("Has Ingresado un RUT inválido\nPor favor Verifique lo ingresado");
-        return 0;
-    }
+        return true;
+    }  
 }

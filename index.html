@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Test Page</title>
+</head>
+<body>
+	<input type="text" id="strRut">
+	<button onclick="validation()">Validar</button>
+	<script type="text/javascript" src='./cl-rut.js'></script>
+	<script type="text/javascript">
+		function validation(){
+			var strRut = document.getElementById('strRut');
+			var boolVal = cl_rut(strRut.value);
+			if(boolVal){
+				alert('yes!');
+			} else {
+				alert('no!!!');
+			}
+		}
+	</script>
+</body>
+</html>
